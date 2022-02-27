@@ -1,41 +1,40 @@
 
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8" >
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Code</title>
+
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    
     <link rel="stylesheet" target="_blank" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
     <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <style>
-            .time {
-                color: green;
-                margin-bottom: 0;
-            }
-
-            .code {
-                display: block;
-                background-color: gainsboro;
-                border: 1px solid black;
-                padding: 5px;
-                margin-top: 0;
-            }
-    </style>
+<!--    <script>hljs.initHighlightingOnLoad();</script>-->
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 </head>
 <body>
-<div>
-    <span class="time" id="load_date" th:text="${codeSnippet.getDate()}"></span>
-    <div>
-        <p th:if="${!codeSnippet.isViewRestricted}">
-            <span id="views_restriction" th:text="${codeSnippet.getViews()}"></span>
-            more views allowed
-        </p>
-        <p th:if="${!codeSnippet.isTimeRestricted}">
-            The code will be available for
-            <u><span id="time_restriction" th:text="${codeSnippet.getTime()}"></span></u>
-            seconds
-        </p>
+    <div class="main_container time-code">
+        
+        <p>Date: <span class="time" id="load_date" th:text="${codeSnippet.getDate()}">2022-02-21 20:42:53</span></p>
+        <div>
+            <p th:if="${!codeSnippet.isViewRestricted}">
+                    <span class="restriction" id="views_restriction" th:text="${codeSnippet.getViews()}">4</span>
+                    more views allowed
+            </p>
+            <p th:if="${!codeSnippet.isTimeRestricted}">
+                    The code will be available for
+                    <span class="restriction" id="time_restriction" th:text="${codeSnippet.getTime()}">60</span>
+                    seconds
+            </p>
+        </div>
+        <pre class="code" id="code_snippet">
+                <code class="format prettyprint" th:text="${codeSnippet.getCode()}">removeNode(key) {
+    this.nodes = this.nodes.filter(n => n.key !== key);
+    [...this.edges.values()].forEach(({ a, b }) => {
+        if (a === key || b === key) this.edges.delete(JSON.stringify([a, b]));
+    });
+}</code>
+        </pre>
     </div>
-    <pre class="code" id="code_snippet"><code th:text="${codeSnippet.getCode()}"></code></pre>
-</div>
 </body>
 </html>

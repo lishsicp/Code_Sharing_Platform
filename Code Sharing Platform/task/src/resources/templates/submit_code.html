@@ -1,21 +1,38 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Create</title>
-    <script src="/js/send.js"></script>
-    <link rel="stylesheet" href="/style.css">
+
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+    <script th:src="@{/js/send.js}"></script>
+
+    <link rel="stylesheet" target="_blank" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
 </head>
 <body>
-    <form>
-        <textarea rows="10" cols="100" placeholder="// write your code here" id="code_snippet"></textarea>
-        <br>
-        <label for="time_restriction">Time restriction</label>
-        <input id="time_restriction" placeholder="0" type="text"/>
-        <label for="views_restriction">Views restriction</label>
-        <input id="views_restriction" type="text" placeholder="0"/>
-        <br>
-        <button id="send_snippet" type="submit" onclick="send()">Submit</button>
-    </form>
+    <div class="main_container">
+        <h3 class="header">Share your code</h3>
 
+        <div class="main_container_form">
+            <form>
+                <textarea class="pretty" rows="8" cols="70" placeholder="// write your code here" id="code_snippet"></textarea>
+                <br>
+                <div class="labels">
+                    <div>
+                        <label for="time_restriction">Time restriction (in seconds)</label>
+                        <input class="pretty"  id="time_restriction" placeholder="0" type="text"/>
+                    </div>
+                    <div class="views_label-input">
+                        <label for="views_restriction">Views restriction</label>
+                        <input class="pretty" id="views_restriction" type="text" placeholder="0"/>
+                        <br>
+                    </div>
+                </div>
+                <button id="send_snippet" type="submit" onclick="send()">Submit</button>
+            </form>
+        </div>
+    </div>
 </body>
 </html>

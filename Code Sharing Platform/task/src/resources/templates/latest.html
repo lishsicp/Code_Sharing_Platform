@@ -2,29 +2,37 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Latest</title>
-    <link rel="stylesheet" target="_blank" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
-    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
-    <script>hljs.initHighlightingOnLoad();</script>
-    <style>
-            .time {
-                color: green;
-                margin-bottom: 0;
-            }
 
-            .code {
-                display: block;
-                background-color: gainsboro;
-                border: 1px solid black;
-                padding: 5px;
-                margin-top: 0;
-            }
-    </style>
+    <link th:href="@{/css/style.css}" rel="stylesheet">
+
+
+    <!--Code keywords color-->
+    <link rel="stylesheet" target="_blank" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/styles/default.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Kaushan+Script&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@10.2.1/build/highlight.min.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
+<!--    <script>hljs.initHighlightingOnLoad();</script>-->
 </head>
 <body>
-    <div th:each="codeList : ${codeList}">
-        <span class="time" id="load_date" th:text="${codeList.getDate()}"></span>
-        <pre class="code" id="code_snippet"><code th:text="${codeList.getCode()}"></code></pre>
+
+    <div class="main_container">
+
+        <h2 class="header">Latest Snippets</h2>
+
+        <div class="time-code" th:each="codeList : ${codeList}">
+            <span class="time" id="load_date" th:text="${codeList.getDate()}">2022-02-21 20:42:53</span>
+            <pre class="code" id="code_snippet">
+                <code class="format prettyprint" th:text="${codeList.getCode()}">removeNode(key) {
+    this.nodes = this.nodes.filter(n => n.key !== key);
+    [...this.edges.values()].forEach(({ a, b }) => {
+        if (a === key || b === key) this.edges.delete(JSON.stringify([a, b]));
+    });
+}</code>
+            </pre>
+        </div>
+
     </div>
 </body>
 </html>
